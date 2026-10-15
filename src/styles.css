@@ -10,6 +10,8 @@
     --chip: #b093f4;
     --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-list: "Poppins", var(--font);
+    --header-height: 61px;
+    --footer-height: 64px;
 }
 
 *,
@@ -195,7 +197,7 @@ p {
     align-items: center;
     justify-content: space-between;
     max-width: 1440px;
-    height: 83px;
+    height: calc(var(--header-height) - 1px);
     margin: 0 auto;
     padding: 0 68px;
 }
@@ -228,8 +230,8 @@ p {
     align-items: center;
     gap: 10px;
     min-width: 120px;
-    height: 39px;
-    padding: 5px;
+    height: 37px;
+    padding: 4px 5px;
     background: var(--page);
     border: 1px solid #e5d9fa;
     border-radius: 8px;
@@ -246,10 +248,10 @@ p {
 .setup {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 28px;
     max-width: 970px;
     margin: 0 auto;
-    padding: 46px 30px 55px;
+    padding: 28px 30px 32px;
 }
 
 .setup__heading {
@@ -548,16 +550,18 @@ p {
 .analysis {
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 18px;
     max-width: 1440px;
+    height: calc(100dvh - var(--header-height) - var(--footer-height));
+    min-height: 460px;
     margin: 0 auto;
-    padding: 46px 68px;
+    padding: 20px 68px 24px;
 }
 
 .step-progress {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .step-progress__header {
@@ -568,7 +572,7 @@ p {
 
 .step-progress__title {
     color: var(--purple-title);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 650;
     line-height: 19.2px;
     letter-spacing: -0.3px;
@@ -576,7 +580,7 @@ p {
 
 .step-progress__count {
     color: #3f3165;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 17.6px;
 }
 
@@ -633,9 +637,9 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
-    height: 50px;
+    height: 47px;
     padding: 0;
     border: none;
     background: none;
@@ -693,16 +697,18 @@ p {
 
 .analysis__layout {
     display: grid;
+    flex: 1;
     grid-template-columns: minmax(0, 1fr) 325px;
     gap: 20px;
+    min-height: 0;
 }
 
 .chart-panel {
     display: flex;
     flex-direction: column;
-    gap: 27px;
-    min-height: 577px;
-    padding: 27px 25px;
+    gap: 18px;
+    min-height: 0;
+    padding: 22px 25px;
     border-width: 2px;
 }
 
@@ -710,9 +716,9 @@ p {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 650;
-    line-height: 28.4px;
+    line-height: 26px;
     letter-spacing: -0.45px;
 }
 
@@ -724,9 +730,24 @@ p {
     margin-left: 11px;
 }
 
+.chart-panel__zoom {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    cursor: zoom-in;
+}
+
 .chart-panel__image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.chart-panel__hint {
+    display: none;
+    color: #7a8190;
+    font-size: 11px;
+    text-align: center;
 }
 
 /* Sized by the chart panel only; the summary scrolls when its text is longer */
@@ -742,9 +763,9 @@ p {
     display: flex;
     flex: 0 1 auto;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     min-height: 0;
-    padding: 27px 25px;
+    padding: 22px 25px;
     border-width: 2px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -772,10 +793,6 @@ p {
 }
 
 .summary__subheading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
     font-size: 15px;
     font-weight: 650;
     line-height: 19.2px;
@@ -784,6 +801,10 @@ p {
 
 .summary__subheading small {
     font-size: 14px;
+}
+
+.summary__subheading .help-badge {
+    margin-left: 3px;
 }
 
 .person {
@@ -1192,8 +1213,8 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 74px;
-    padding: 16px 34px;
+    min-height: var(--footer-height);
+    padding: 11px 34px;
     background: rgba(255, 255, 255, 0.93);
     border-top: 1px solid #cdcfd5;
     backdrop-filter: blur(8px);
@@ -1239,16 +1260,39 @@ p {
 /* Smaller screens */
 
 @media (max-width: 1100px) {
+    .app-header__inner {
+        padding: 0 24px;
+    }
+
     .analysis {
-        padding: 32px 24px;
+        padding: 16px 24px 20px;
+    }
+
+    .analysis__layout {
+        grid-template-columns: minmax(0, 1fr) 300px;
+    }
+
+    .summary {
+        padding: 20px 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    .analysis {
+        height: auto;
+        min-height: 0;
     }
 
     .analysis__layout {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .chart-panel {
-        min-height: 0;
+    .chart-panel__zoom {
+        flex: none;
+    }
+
+    .chart-panel__image {
+        height: auto;
     }
 
     .side-column {
@@ -1262,7 +1306,76 @@ p {
 
 @media (max-width: 860px) {
     .app-header__inner {
-        padding: 0 20px;
+        padding: 0 16px;
+    }
+
+    .brand__name {
+        font-size: 18px;
+    }
+
+    .user-chip {
+        min-width: 0;
+    }
+
+    .analysis {
+        gap: 14px;
+        padding: 16px 12px 24px;
+    }
+
+    .step-progress__title {
+        font-size: 14px;
+    }
+
+    .step-progress__count {
+        flex: none;
+        margin-left: 12px;
+    }
+
+    /* Dots only on phones, the chart title already names the step */
+    .step-progress__list {
+        min-width: 0;
+    }
+
+    .step-progress__list::before,
+    .step-progress__list::after {
+        left: 13px;
+    }
+
+    .step-progress__list::before {
+        right: 13px;
+    }
+
+    .step-progress__list::after {
+        width: calc((100% - 26px) * var(--progress));
+    }
+
+    .step-progress__item {
+        width: 26px;
+    }
+
+    .step-progress__button {
+        height: 26px;
+    }
+
+    .step-progress__label {
+        display: none;
+    }
+
+    .chart-panel,
+    .summary {
+        padding: 16px 12px;
+    }
+
+    .chart-panel {
+        gap: 14px;
+    }
+
+    .chart-panel__hint {
+        display: block;
+    }
+
+    .person-card {
+        flex: 1 1 0;
     }
 
     .setup {
@@ -1285,16 +1398,8 @@ p {
 
     .chart-panel__title {
         align-items: flex-start;
-        font-size: 18px;
-        line-height: 25px;
-    }
-
-    .chart-panel__image {
-        min-width: 600px;
-    }
-
-    .chart-panel {
-        overflow-x: auto;
+        font-size: 17px;
+        line-height: 24px;
     }
 
     .app-footer {

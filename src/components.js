@@ -198,7 +198,10 @@ function renderChartPanel(step, index) {
                 ${step.title}
                 ${step.titleHelp ? renderHelpBadge() : ""}
             </h1>
-            <img class="chart-panel__image" src="${CHARTS[step.chart]}" alt="${step.chartAlt}" />
+            <a class="chart-panel__zoom" href="${CHARTS[step.chart]}" target="_blank" rel="noopener" title="Open full size">
+                <img class="chart-panel__image" src="${CHARTS[step.chart]}" alt="${step.chartAlt}" />
+            </a>
+            <p class="chart-panel__hint">Tap the chart to open it full size</p>
         </section>
     `;
 }
